@@ -242,42 +242,45 @@ class App {
   }
 
   _editWorkout(e) {
-    const workout = this.#workouts.find(work => work.id === e.dataset.id);
-    console.log(workout);
+    this._showAlert(
+      'This functionality is not available yet! To edit please delete the workout and create a new one.'
+    );
+    // const workout = this.#workouts.find(work => work.id === e.dataset.id);
+    // console.log(workout);
 
-    form.classList.remove('hidden');
-    inputDistance.focus();
+    // form.classList.remove('hidden');
+    // inputDistance.focus();
 
-    inputDistance.value = workout.distance;
-    inputDuration.value = workout.duration;
-    if (workout.type === 'running') {
-      inputCadence.value = workout.cadence;
-    } else {
-      inputElevation.value = workout.elevationGain;
-    }
+    // inputDistance.value = workout.distance;
+    // inputDuration.value = workout.duration;
+    // if (workout.type === 'running') {
+    //   inputCadence.value = workout.cadence;
+    // } else {
+    //   inputElevation.value = workout.elevationGain;
+    // }
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      console.log(inputDistance.value, inputDuration.value, inputType.value);
+    // form.addEventListener('submit', function (e) {
+    //   e.preventDefault();
+    //   console.log(inputDistance.value, inputDuration.value, inputType.value);
 
-      workout.distance = +inputDistance.value;
-      workout.duration = +inputDuration.value;
-      if (workout.type === 'running') {
-        workout.cadence = +inputCadence.value;
-      } else {
-        workout.elevationGain = +inputElevation.value;
-      }
+    //   workout.distance = +inputDistance.value;
+    //   workout.duration = +inputDuration.value;
+    //   if (workout.type === 'running') {
+    //     workout.cadence = +inputCadence.value;
+    //   } else {
+    //     workout.elevationGain = +inputElevation.value;
+    //   }
 
-      // Clear the input fields
-      inputDistance.value =
-        inputDuration.value =
-        inputCadence.value =
-        inputElevation.value =
-          '';
+    //   // Clear the input fields
+    //   inputDistance.value =
+    //     inputDuration.value =
+    //     inputCadence.value =
+    //     inputElevation.value =
+    //       '';
 
-      // Hide the form
-      form.classList.add('hidden');
-    });
+    //   // Hide the form
+    //   form.classList.add('hidden');
+    // });
   }
 
   _deleteWorkout(e) {
