@@ -124,7 +124,7 @@ class App {
       navigator.geolocation.getCurrentPosition(
         this._loadMap.bind(this),
         function () {
-          alert('Could not get your position');
+          this._showAlert('Could not get your position');
         }
       );
     }
@@ -179,7 +179,7 @@ class App {
 
     // Check if mapEvent is defined
     if (!this.#mapEvent) {
-      alert('Please click on the map first!');
+      this._showAlert('Please click on the map first!');
       return;
     }
 
@@ -206,7 +206,7 @@ class App {
         !validInputs(distance, duration, cadence) ||
         !allPositive(distance, duration, cadence)
       )
-        return alert('Input has to be positive numbers!');
+        return this._showAlert('Input has to be positive numbers!');
 
       workout = new Running([lat, lng], distance, duration, cadence);
     }
@@ -219,7 +219,7 @@ class App {
         !validInputs(distance, duration, elevation) ||
         !allPositive(distance, duration)
       )
-        return alert('Input has to be positive numbers!');
+        return this._showAlert('Input has to be positive numbers!');
       workout = new Cycling([lat, lng], distance, duration, elevation);
     }
 
@@ -424,6 +424,38 @@ class App {
 
     this.#workouts.forEach(work => {
       this._renderWorkout(work);
+    });
+  }
+
+  _showAlert(msg) {
+    const modal = document.querySelector('.modal');
+    const overlay = document.querySelector('.overlay');
+    const btnCloseModal = document.querySelector('.close-modal');
+    const modalText = document.querySelector('.modal-text');
+
+    modalText.textContent = msg;
+
+    const openModal = function () {
+      modal.classList.remove('hidden');
+      overlay.classList.remove('hidden');
+    };
+
+    const closeModal = function () {
+      modal.classList.add('hidden');
+      overlay.classList.add('hidden');
+    };
+
+    openModal();
+
+    btnCloseModal.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', function (e) {
+      // console.log(e.key);
+
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal();
+      }
     });
   }
 
